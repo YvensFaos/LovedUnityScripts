@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Original Author: Bugulet
+/// Revisor: YvensFaos
+/// </summary>
 public class DestroyAfterSeconds : MonoBehaviour
 {
-    [SerializeField]
-    private float DestroyTime = 1;
-    
-    void Start()
+    [SerializeField] private float destroyTime = 1.0f;
+
+    private void Start()
     {
-        Destroy(gameObject, DestroyTime);
+        Destroy(gameObject, destroyTime);
     }
 }

@@ -1,46 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+
+/// <summary>
+/// Original Author: Bugulet
+/// Revisor: YvensFaos
+/// </summary>
 public class CallOnCollision : MonoBehaviour
 {
-    [SerializeField] bool OnCollision = true;
-    [SerializeField] bool OnTrigger = false;
+    [SerializeField] private bool onCollision = true;
+    [SerializeField] private bool onTrigger;
 
-    [Tooltip("What object type do you want this to work on, empty for any object")]
-    public string CollisionObjectTag="";
-    
-    public UnityEvent eventToTrigger;
-    
+    [Tooltip("What object type do you want this to work on, empty for any object")] [SerializeField]
+    private string objectTag;
+
+    [SerializeField] private UnityEvent eventToTrigger;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (OnTrigger)
+        if (onTrigger)
         {
-            if (CollisionObjectTag.Length > 0 && other.gameObject.tag == CollisionObjectTag)
-            {
-                eventToTrigger.Invoke();
-            }
+            Resolve(other.gameObject);    
+        }
+    }
 
-            if (CollisionObjectTag.Length == 0)
+    private void OnCollisionEnter(Collision other)
+    {
+        if (onCollision)
+        {
+            Resolve(other.gameObject);    
+        }
+    }
+
+    private void Resolve(GameObject other)
+    {
+        if (objectTag.Length > 0)
+        {
+            if (other.CompareTag(objectTag))
             {
                 eventToTrigger.Invoke();
             }
         }
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (OnCollision)
+        else
         {
-            if (CollisionObjectTag.Length > 0 && collision.gameObject.tag == CollisionObjectTag)
-            {
-                eventToTrigger.Invoke();
-            }
-
-            if (CollisionObjectTag.Length == 0)
-            {
-                eventToTrigger.Invoke();
-            }
+            eventToTrigger.Invoke();
         }
     }
 }

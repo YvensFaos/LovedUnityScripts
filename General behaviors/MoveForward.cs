@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Original Author: Bugulet
+/// Revisor: YvensFaos
+/// </summary>
 public class MoveForward : MonoBehaviour
 {
-    public float Speed;
-    void Update()
+    [SerializeField] private float speed;
+    private void Update()
     {
-        transform.Translate(Vector3.forward * Speed*Time.deltaTime);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 }
