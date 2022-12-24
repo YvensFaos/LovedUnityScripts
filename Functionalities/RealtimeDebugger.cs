@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 //Made for only testing purposes so use at own discretion
+///<summary> A Unity debugger window that allows you to subscribe values you want to debug in realtime easily </summary>
 public class RealtimeDebugger : EditorWindow
 {
     static Dictionary<string, object> debugProperties = new Dictionary<string, object>();
@@ -16,7 +17,7 @@ public class RealtimeDebugger : EditorWindow
 
     void OnGUI()
     {
-        foreach (KeyValuePair<string, object> debugProperty in debugProperties)
+        foreach (var debugProperty in debugProperties)
         {
             DisplayObject(debugProperty.Key, debugProperty.Value);
         }
@@ -54,7 +55,6 @@ public class RealtimeDebugger : EditorWindow
         }
         else if (value is Object o)
         {
-            //SerializedObject serializedObject = new SerializedObject(o);
             EditorGUILayout.ObjectField(label, o, o.GetType(), false);
         }
         else
@@ -78,7 +78,7 @@ public class RealtimeDebugger : EditorWindow
         Repaint();
     }
 
-    ///<summary>Supports only primitive types and vectors.</summary>
+    ///<summary>Add property to debug window. Only supports primitive types and vectors (and possibly UnityEngine.Object types).</summary>
     public static void AddDebugProperty(string propertyName, object property)
     {
         debugProperties[propertyName] = property;
