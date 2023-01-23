@@ -45,12 +45,7 @@ public class ScenePropertyDrawer : PropertyDrawer
             }
         }
 
-        List<EditorBuildSettingsScene> scenes = new List<EditorBuildSettingsScene>();
-
-        foreach (var editorScene in EditorBuildSettings.scenes)
-        {
-            scenes.Add(editorScene);
-        }
+        List<EditorBuildSettingsScene> scenes = EditorBuildSettings.scenes.ToList();
 
         var GUIDs = AssetDatabase.FindAssets(assetName + ".unity");
         if (GUIDs == null || GUIDs.Length == 0)
@@ -74,12 +69,7 @@ public class ScenePropertyDrawer : PropertyDrawer
             }
         }
 
-        List<EditorBuildSettingsScene> scenes = new List<EditorBuildSettingsScene>();
-
-        foreach (var editorScene in EditorBuildSettings.scenes)
-        {
-            scenes.Add(editorScene);
-        }
+        List<EditorBuildSettingsScene> scenes = EditorBuildSettings.scenes.ToList();
 
         scenes.Add(new EditorBuildSettingsScene(AssetDatabase.GetAssetPath(asset), true));
         EditorBuildSettings.scenes = scenes.ToArray();
